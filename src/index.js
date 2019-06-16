@@ -1,40 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import faker from 'faker';
-import ApprovalCArd from './ApprovalCard';
-
-import Comment from './Comment'
-const App = () => {
-	return (
-
-		<div className="ui container comments">
-			<br />
-			<ApprovalCArd >
-				<div>
-					<h4>Warning</h4>
-				</div>
-			</ApprovalCArd>
 
 
+class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			lat: null,
+			errorMsg: ''
+		};
+		window.navigator.geolocation.getCurrentPosition(
+			pos => {
+				this.setState({
+					lat: pos.coords.latitude
+				})
+			},
+			err => {
+				this.setState({
+					errorMsg: err.message
+				})
+			}
+		);
+	}
+	render() {
+		if (this.state.errorMsg && !this.state.lat) {
+			return <div> Err: {this.state.errorMsg}</div>
+		}
+		if (!this.state.errorMsg && this.state.lat) {
+			return <div>
+				<h1>Lattitude: {this.state.lat}  </h1>
+			</div>
+		}
+		return <div>Loading !</div>
+	}
 
-			<ApprovalCArd >
-				<Comment
-					author={faker.name.firstName()} content="Nice Job" />
-			</ApprovalCArd>
-
-			<ApprovalCArd >
-				<Comment
-					author={faker.name.firstName()} content="Me like" />
-			</ApprovalCArd>
-
-			<ApprovalCArd >
-				<Comment
-					author={faker.name.firstName()} content="Yes" />
-			</ApprovalCArd>
-		</div>
-
-	)
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));
