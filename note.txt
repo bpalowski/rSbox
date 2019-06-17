@@ -1,0 +1,14 @@
+component did mount
+-gets invoked once
+-data loading 
+
+
+component did update 
+- multiple request each time something gets updated
+
+-
+
+component will unmount 
+- clean up as soon as componet ends 
+
+
