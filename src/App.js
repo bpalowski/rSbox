@@ -4,7 +4,9 @@ import SearchBar from './SearchBar';
 
 function App() {
 	return (
-		<SearchBar />
+		<div className="ui container" style={{ marginTop: '20px' }}>
+			<SearchBar />
+		</div>
 	)
 }
 
